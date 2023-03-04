@@ -22,7 +22,7 @@ class sellerAccess
         // }
 
         if (Auth::user()->role != "seller") {
-            return back();
+            return redirect()->route('registerSeller');
         }
         return $next($request);
     }

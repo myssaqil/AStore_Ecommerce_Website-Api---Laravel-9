@@ -26,14 +26,6 @@
                 <li>
                     <a href="#" class="nav-link text-white">
                         <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
-                        </svg>
-                        Product not active
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2"></use>
                         </svg>
                         Order request

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::get('/shop', [ProductController::class, 'shopview'])->name('getproduct');
 
 Route::get('product/detail/{id}', [ProductController::class, 'detailProductView'])->name('product-detail.action');
 
+Route::post('product/detail/{id}', [OrdersController::class, 'addOrders'])->name('addOrders.action');
 
 // Register
 Route::get('user/register', [AuthController::class, 'registeruser'])->name('register');
@@ -33,8 +35,13 @@ Route::post('login', [AuthController::class, 'login_action'])->name('login.actio
 
 
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::get('search', [ProductController::class, 'search'])->name('search');
+    Route::get('history', [OrdersController::class, 'getHistoryUsers']);
+    Route::get('search/empty/?query={query}', [ProductController::class, 'search'])->name('search?');
+    Route::get('profile', [AuthController::class, 'index'])->name('index-profile');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout.action');
+    Route::post('profile', [AuthController::class, 'post_alamat'])->name('alamat.action');
+    Route::get('register/seller', [AuthController::class, 'registerSeller'])->name('registerSeller');
     Route::group(['middleware' => 'seller'], function () {
         Route::get('seller', [ProductController::class, 'index'])->name('seller');
         // Seller Route

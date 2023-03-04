@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(assets/bg.png);
+}
+.card-body h6{
+    font-size: 12px;
+}

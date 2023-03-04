@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AddressOfUsers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
@@ -25,8 +26,10 @@ class ProductController extends Controller
     public function detailProductView($id)
     {
         $products = Product::where('id', $id)->first();
+        $addersUsers = AddressOfUsers::where('id_users', auth()->user()->id)->get();
 
-        return view('detailProduct', compact(['products']));
+
+        return view('detailProduct', with(compact('products', 'addersUsers')));
     }
 
 
@@ -40,7 +43,7 @@ class ProductController extends Controller
         $categorys = ProductCategory::all();
 
 
-        $products = Product::filter(request(['search', 'category', 'product_status']))->where('id_seller', auth()->user()->id)->with('categorys:id,category')->paginate(5);
+        $products = Product::filter(request(['search', 'category', 'product_status']))->where('id_seller', auth()->user()->id)->with('categorys:id,category')->paginate(2);
         return view('Seller.Dashboard', compact(['products']), compact(['categorys']));
     }
 
@@ -88,7 +91,7 @@ class ProductController extends Controller
 
         $request->validate(
             [
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
                 'productname' => 'required',
                 'productprice' => 'required',
                 'product_condition' => 'required',
@@ -100,7 +103,7 @@ class ProductController extends Controller
 
         $image_path = $request->file('image')->store('product-banner', 'public');
 
-        $url = "http://127.0.0.1:8000/storage/";
+        $url = "http://192.168.182.80:8000/storage/";
 
         $product = new Product([
             'product_name' => $request->productname,
@@ -135,5 +138,22 @@ class ProductController extends Controller
 
 
         return redirect("seller");
+    }
+
+    public function searchGetall()
+    {
+        $products = Product::where('product_status', 'active')->get();
+        return view('search', compact(['products']));
+    }
+    public function search()
+    {
+        // if ($request->query != "") {
+
+        $products = Product::where('product_status', 'active')->where('product_name', 'like', "%" . request('query') . "%")->get();
+        return view('search', compact(['products']));
+        // }
+
+        // $products = Product::where('product_status', 'active')->get();
+        // return view('search', compact(['products']));
     }
 }

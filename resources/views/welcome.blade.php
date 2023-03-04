@@ -34,7 +34,7 @@
                 </ul>
 
 
-                <a class="nav-link " aria-current="page" href="#"><img src="{{asset('Assets/Svg/SearchIcons.svg')}}" style="width: 30px; height: 30px;" alt=""></a>
+                <a class="nav-link " aria-current="page" href="/search"><img src="{{asset('Assets/Svg/SearchIcons.svg')}}" style="width: 30px; height: 30px;" alt=""></a>
                 @auth
 
                 <a class="nav-link " aria-current="page" href="#"><img src="{{asset('Assets/Svg/CartIcons.svg')}}" style="width: 30px; height: 30px;" alt=""></a>
@@ -51,7 +51,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
 
 
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="/profile">
                                 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                                     <div class="col ms-3">
                                         <img src="{{asset('Assets/Svg/CartIcons.svg')}}" alt="" style="height: 15px; width: 15px;">
@@ -84,7 +84,7 @@
                                 </div>
                             </a></li>
 
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="/history">
                                 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                                     <div class="col ms-3">
                                         <img src="{{asset('Assets/Svg/CartIcons.svg')}}" alt="" style="height: 15px; width: 15px;">
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <button class="btn-head" id="btnbuy" onmouseover="changeElementBtn()" onmouseleave="defaultElementBtn()">Let's Buy Now <img src="{{asset('Assets/Svg/dollaricons.svg')}}" class="icons-btn-head" alt=""></button>
+        <button class="btn-head" id="btnbuy">Let's Buy Now <img src="{{asset('Assets/Svg/dollaricons.svg')}}" class="icons-btn-head" alt=""></button>
 
     </div>
     <div class="category-box">

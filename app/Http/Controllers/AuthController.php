@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AddressOfUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,34 @@ class AuthController extends Controller
     public function registeruser()
     {
         return view('User/Auth/Register');
+    }
+    public function registerSeller()
+    {
+        return view('addseller');
+    }
+    public function post_alamat(Request $request)
+    {
+
+        $request->validate(
+            [
+                'name' => 'required',
+                'adders' => 'required',
+            ]
+        );
+
+
+
+
+        $adderss = new AddressOfUsers([
+            'name' => $request->name,
+            'adders' => $request->adders,
+            'id_users' => auth()->user()->id,
+        ]);
+
+        $adderss->save();
+
+        $adders = AddressOfUsers::where('id_users', auth()->user()->id)->get();
+        return view('Profile/index', compact(['adders']));
     }
     public function user_register_action(Request $request)
     {
@@ -95,5 +124,11 @@ class AuthController extends Controller
     public function home()
     {
         return view('Welcome/welcome');
+    }
+
+    public function index()
+    {
+        $adders = AddressOfUsers::where('id_users', auth()->user()->id)->get();
+        return view('Profile/index', compact(['adders']));
     }
 }

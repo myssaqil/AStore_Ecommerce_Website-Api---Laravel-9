@@ -128,30 +128,45 @@
 
     <!-- End Navbar -->
 
-    <div class="container-detail">
-        <img src="{{$products->product_banner}}" class="img-banner" alt="">
-        <div class="wrapper-detail-product">
-            <h1 class="title-product-detail">{{$products->product_name}}</h1>
-            <h1 class="price-product-detail">Rp.{{$products->product_price}}</h1>
-            <h1 class="desc-product-detail">Description</h1>
-            <p class="desc-product-detail-content">Hello world</p>
-            <h1 class="desc-product-detail">Location : Hallo</h1>
-            <h1 class="desc-product-detail" id="stock-count">Stock : {{$products->product_stock}}</h1>
+    <form action="{{ route('addOrders.action', $products->id)}}" method="POST">
+        @csrf
+        <div class="container-detail">
+            <img src="{{$products->product_banner}}" class="img-banner" alt="">
+            <div class="wrapper-detail-product">
+                <h1 class="title-product-detail">{{$products->product_name}}</h1>
+                <h1 class="price-product-detail">Rp.{{$products->product_price}}</h1>
+                <h1 class="desc-product-detail">Description</h1>
+                <p class="desc-product-detail-content">Hello world</p>
+                <h1 class="desc-product-detail">Location : Hallo</h1>
+                <h1 class="desc-product-detail" id="stock-count">Stock : {{$products->product_stock}}</h1>
 
 
-            <div class="wrapper-increment">
-                <button type="button" onclick="Decrement()" class="btn btn-dark" id="btnDecrement">-</button>
+                <div class="wrapper-increment">
+                    <button type="button" onclick="Decrement()" class="btn btn-dark" id="btnDecrement">-</button>
 
-                <input type="number" class="form-control ms-2 me-2" name="product_stock" style="width: 13%; text-align: center;" aria-describedby="emailHelp" required value="1" min="1" max="{{$products->product_stock}}" id="input-quantity" onkeyup="quantityValidation()">
+                    <input type="number" class="form-control ms-2 me-2" name="product_count" style="width: 13%; text-align: center;" aria-describedby="emailHelp" required value="1" min="1" max="{{$products->product_stock}}" id="input-quantity" onkeyup="quantityValidation()">
 
-                <button type="button" onclick="Increment()" class="btn btn-dark" id="btnIncrement">+</button>
+                    <button type="button" onclick="Increment()" class="btn btn-dark" id="btnIncrement">+</button>
+                </div>
+                <p id="warning-txt"></p>
+
+                <input type="hidden" value="{{$products->product_price}}" name="price">
+                <input type="hidden" value="{{$products->id_seller}}" name="sellerID">
+                <input type="hidden" value="{{$products->id}}" name="productID">
+
+                <select class="form-select mb-2 mt-2" aria-label="Default select example" name="adders">
+                    <option selected>Pilih alamat anda</option>
+                    @foreach($addersUsers as $addersUser)
+                    <option value="{{$addersUser->id}}">{{$addersUser->adders}}</option>
+                    @endforeach
+                </select>
+
+
+                <h1 class="price-product-detail" id="total-price">Rp.{{$products->product_price}}</h1>
+                <button type="submit" onclick="" class="btn btn-dark mt-1" id="btn-co" style="width: 150px;">Checkout</button>
             </div>
-            <p id="warning-txt"></p>
-
-            <h1 class="price-product-detail" id="total-price">Rp.{{$products->product_price}}</h1>
-            <button type="button" onclick="" class="btn btn-dark mt-1" id="btn-co" style="width: 150px;">Checkout</button>
         </div>
-    </div>
+    </form>
 
 
 
