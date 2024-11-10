@@ -147,7 +147,7 @@
                     <input type="number" class="form-control ms-2 me-2" name="product_count" style="width: 13%; text-align: center;" aria-describedby="emailHelp" required value="1" min="1" max="{{$products->product_stock}}" id="input-quantity" onkeyup="quantityValidation()">
 
                     <button type="button" onclick="Increment()" class="btn btn-dark" id="btnIncrement">+</button>
-                </div>
+                </div> 
                 <p id="warning-txt"></p>
 
                 <input type="hidden" value="{{$products->product_price}}" name="price">
